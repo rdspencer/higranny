@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>716149055355-jk1ehg9ig7itehp4lqubrq2bngdhnm93.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.716149055355-jk1ehg9ig7itehp4lqubrq2bngdhnm93</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>716149055355-knua0f4n6rfe8nf3k8juiukgjl78kdom.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyANW2sjYTjHs94xKfyio5Q7Oe2Eyow9v60</string>
+	<key>GCM_SENDER_ID</key>
+	<string>716149055355</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>uk.co.hyperbook.higranny</string>
+	<key>PROJECT_ID</key>
+	<string>higranny-cc55f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>higranny-cc55f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:716149055355:ios:d871f5bf1026cb377fa7de</string>
+</dict>
+</plist>

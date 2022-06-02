@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "716149055355",
+    "project_id": "higranny-cc55f",
+    "storage_bucket": "higranny-cc55f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716149055355:android:a40f5be9ca639d917fa7de",
+        "android_client_info": {
+          "package_name": "uk.co.hyperbook.higranny"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716149055355-knua0f4n6rfe8nf3k8juiukgjl78kdom.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uk.co.hyperbook.higranny",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "716149055355-r6tnojgpj2drdv7fgkeke53s42hd11ls.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUVGr6bUsPMMk6D8dMLxV3OMwBVSy85EA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716149055355-r6tnojgpj2drdv7fgkeke53s42hd11ls.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "716149055355-jk1ehg9ig7itehp4lqubrq2bngdhnm93.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "uk.co.hyperbook.higranny"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
