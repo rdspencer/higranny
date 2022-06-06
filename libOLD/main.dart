@@ -115,11 +115,8 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'LoginPage': LoginPageWidget(),
       'HomePage': HomePageWidget(),
-      'CarerHomePage': CarerHomePageWidget(),
-      'GrannyHomePage': GrannyHomePageWidget(),
-      'CarerVideoPage': CarerVideoPageWidget(),
+      'LoginPage': LoginPageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -136,14 +133,6 @@ class _NavBarPageState extends State<NavBarPage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.login,
-              size: 24,
-            ),
-            label: 'Home',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
               Icons.home_outlined,
               size: 26,
             ),
@@ -156,36 +145,8 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.accessibility_sharp,
-              size: 26,
-            ),
-            activeIcon: Icon(
-              Icons.accessibility,
-              size: 26,
-            ),
-            label: 'Home',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.accessible_forward_sharp,
-              size: 26,
-            ),
-            activeIcon: Icon(
-              Icons.accessible,
-              size: 26,
-            ),
-            label: 'Home',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.accessible_forward_sharp,
-              size: 26,
-            ),
-            activeIcon: Icon(
-              Icons.accessible,
-              size: 26,
+              Icons.login,
+              size: 24,
             ),
             label: 'Home',
             tooltip: '',
