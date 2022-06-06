@@ -73,31 +73,22 @@ class _ConnectToRoomState extends State<ConnectToRoom> {
     String serverUrl = 'https://meet.jitsi.si';
     print('(X2)');
     return Center(
-      child: Column(
-        children: [
-          IconButton(
-              onPressed: () {
-                print('(X6)');
-              },
-              icon: Icon(Icons.ac_unit)),
-          SizedBox(
-            height: 64.0,
-            width: double.maxFinite,
-            child: ElevatedButton(
-              onPressed: () {
-                print('(X1)');
-                _joinMeeting(widget.room, widget.displayName);
-              },
-              child: Text(
-                "Join Meeting",
-                style: TextStyle(color: Colors.white),
-              ),
-              style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateColor.resolveWith((states) => Colors.blue)),
-            ),
+      child: SizedBox(
+        height: 50.0,
+        width: double.maxFinite,
+        child: ElevatedButton(
+          onPressed: () {
+            print('(X1)');
+            _joinMeeting(widget.room, widget.displayName);
+          },
+          child: Text(
+            "Join Meeting 301",
+            style: TextStyle(color: Colors.white),
           ),
-        ],
+          style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateColor.resolveWith((states) => Colors.blue)),
+        ),
       ),
     );
   }
