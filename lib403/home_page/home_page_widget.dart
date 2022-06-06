@@ -5,14 +5,14 @@ import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class GrannyHomePageWidget extends StatefulWidget {
-  const GrannyHomePageWidget({Key key}) : super(key: key);
+class HomePageWidget extends StatefulWidget {
+  const HomePageWidget({Key key}) : super(key: key);
 
   @override
-  _GrannyHomePageWidgetState createState() => _GrannyHomePageWidgetState();
+  _HomePageWidgetState createState() => _HomePageWidgetState();
 }
 
-class _GrannyHomePageWidgetState extends State<GrannyHomePageWidget> {
+class _HomePageWidgetState extends State<HomePageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -24,12 +24,10 @@ class _GrannyHomePageWidgetState extends State<GrannyHomePageWidget> {
         child: Container(
           width: double.infinity,
           height: double.infinity,
-          child: custom_widgets.ConnectToRoom(
+          child: custom_widgets.NavigateToGrannyOrCarer(
             width: double.infinity,
             height: double.infinity,
-            room: valueOrDefault(currentUserDocument?.room, ''),
             role: valueOrDefault(currentUserDocument?.role, ''),
-            displayName: currentUserDisplayName,
           ),
         ),
       ),

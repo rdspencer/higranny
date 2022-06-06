@@ -1,4 +1,3 @@
-import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
@@ -20,17 +19,12 @@ class _CarerVideoPageWidgetState extends State<CarerVideoPageWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
-      body: AuthUserStreamWidget(
-        child: Container(
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        child: custom_widgets.ConnectToRoom(
           width: double.infinity,
           height: double.infinity,
-          child: custom_widgets.ConnectToRoom(
-            width: double.infinity,
-            height: double.infinity,
-            room: valueOrDefault(currentUserDocument?.room, ''),
-            role: valueOrDefault(currentUserDocument?.role, ''),
-            displayName: currentUserDisplayName,
-          ),
         ),
       ),
     );

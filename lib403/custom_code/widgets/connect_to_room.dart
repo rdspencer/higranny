@@ -91,7 +91,7 @@ class _ConnectToRoomState extends State<ConnectToRoom> {
             _joinMeeting(widget.room, widget.displayName);
           },
           child: Text(
-            "Join Meeting 503",
+            "Join Meeting 403",
             style: TextStyle(color: Colors.white),
           ),
           style: ButtonStyle(
