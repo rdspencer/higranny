@@ -37,9 +37,8 @@ import 'package:flutter/material.dart';*/
 import 'dart:io';
 import 'package:jitsi_meet/jitsi_meet.dart';
 import 'package:flutter/foundation.dart';
-import '../../auth/auth_util.dart';
 
-String command = '';
+const buildNumber = 505;
 
 class ConnectToRoom extends StatefulWidget {
   const ConnectToRoom({
@@ -65,7 +64,7 @@ class _ConnectToRoomState extends State<ConnectToRoom> {
   @override
   void initState() {
     super.initState();
-    print('(X3A)${widget.room}*${widget.displayName}');
+    print('(X3A)');
     JitsiMeet.addListener(JitsiMeetingListener(
         onConferenceWillJoin: _onConferenceWillJoin,
         onConferenceJoined: _onConferenceJoined,
@@ -82,98 +81,29 @@ class _ConnectToRoomState extends State<ConnectToRoom> {
 
   @override
   Widget build(BuildContext context) {
-    String serverUrl = 'https://meet.jitsi.si';
+    _joinMeeting(widget.room, widget.displayName);
+    return Container();
+   /* String serverUrl = 'https://meet.jitsi.si';
     print('(X2)');
-    return Scaffold(
-      // key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryColor,
-      body: Center(
-        child: Column(
-          children: [
-            StreamBuilder<List<SignalsRecord>>(
-              stream: querySignalsRecord(
-                queryBuilder: (signalsRecord) => signalsRecord.where('room',
-                    isEqualTo: valueOrDefault(currentUserDocument?.room, '')),
-                singleRecord: true,
-              ),
-              builder: (BuildContext context, snapshot) {
-                print('(X105)${snapshot}');
-                if (!snapshot.hasData) return new Text('Loading...');
-                print('(X106)${snapshot.data}');
-                if ((snapshot.data != null) & (snapshot.data.length > 0)) {
-                  print(
-                      '(X107)${snapshot.data.first}^${widget.room}%${widget.displayName}');
-                  command = snapshot.data.first.message;
-                  if (command == '1') {
-                    _joinMeeting(widget.room, widget.displayName);
-                    return Container();
-                  }
-                  return Text('XXX');
-                }
-              },
-            ),
-            /*AuthUserStreamWidget(
-            child: FutureBuilder<List<SignalsRecord>>(
-              future: querySignalsRecordOnce(
-                queryBuilder: (signalsRecord) => signalsRecord.where('room',
-                    isEqualTo: valueOrDefault(currentUserDocument?.room, '')),
-                singleRecord: true,
-              ),
-              builder: (context, snapshot) {
-                // Customize what your widget looks like when it's loading.
-                print('(X101)${currentUserDocument.room}&${snapshot}');
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: SizedBox(
-                      width: 50,
-                      height: 50,
-                      child: CircularProgressIndicator(
-                        color: FlutterFlowTheme.of(context).primaryColor,
-                      ),
-                    ),
-                  );
-                }
-                List<SignalsRecord> textSignalsRecordList = snapshot.data;
-                // Return an empty Container when the document does not exist.
-                print('(X102)${snapshot.data}');
-                if (snapshot.data.isEmpty) {
-                  return Container();
-                }
-                final textSignalsRecord = textSignalsRecordList.isNotEmpty
-                    ? textSignalsRecordList.first
-                    : null;
-                print('(X103)${snapshot}${textSignalsRecord.message}');
-
-                return Text(
-                  textSignalsRecord.message,
-                  style: FlutterFlowTheme.of(context).title2,
-                );
-              },
-            ),
+    return Center(
+      child: SizedBox(
+        height: 50.0,
+        width: double.maxFinite,
+        child: ElevatedButton(
+          onPressed: () {
+            print('(X1)');
+            _joinMeeting(widget.room, widget.displayName);
+          },
+          child: Text(
+            "Join Meeting 504",
+            style: TextStyle(color: Colors.white),
           ),
-*/
-
-            SizedBox(
-              height: 50.0,
-              width: double.maxFinite,
-              child: ElevatedButton(
-                onPressed: () {
-                  print('(X1)');
-                  _joinMeeting(widget.room, widget.displayName);
-                },
-                child: Text(
-                  "Join Meeting 508",
-                  style: TextStyle(color: Colors.white),
-                ),
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateColor.resolveWith(
-                        (states) => Colors.blue)),
-              ),
-            ),
-          ],
+          style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateColor.resolveWith((states) => Colors.blue)),
         ),
       ),
-    );
+    );*/
   }
 }
 
@@ -201,7 +131,7 @@ _joinMeeting(String room, String displayName) async {
     // FeatureFlagEnum.CLOSE_CAPTIONS_ENABLED: true,
     /// Flag indicating if chat should be enabled.
     /// Default: enabled (true).
-    // FeatureFlagEnum.CHAT_ENABLED: false,
+    FeatureFlagEnum.CHAT_ENABLED: true,
     /// Flag indicating if invite functionality should be enabled.
     /// Default: enabled (true).
     // FeatureFlagEnum.INVITE_ENABLED: true,
@@ -261,9 +191,9 @@ _joinMeeting(String room, String displayName) async {
     ..userDisplayName = displayName
     ..userEmail = 'a@a.com'
     ..iosAppBarRGBAColor = "#0080FF80" //transparent blue
-    ..audioOnly = false
-    ..audioMuted = false
-    ..videoMuted = false
+    ..audioOnly = true
+    ..audioMuted = true
+    ..videoMuted = true
     //..token = '<jwt_token>'
     ..featureFlags.addAll(featureFlags)
     ..webOptions = {

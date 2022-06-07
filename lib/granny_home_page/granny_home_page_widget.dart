@@ -1,4 +1,5 @@
 import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
@@ -20,18 +21,56 @@ class _GrannyHomePageWidgetState extends State<GrannyHomePageWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
-      body: AuthUserStreamWidget(
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          child: custom_widgets.ConnectToRoom(
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Container(
             width: double.infinity,
-            height: double.infinity,
-            room: valueOrDefault(currentUserDocument?.room, ''),
-            role: valueOrDefault(currentUserDocument?.role, ''),
-            displayName: currentUserDisplayName,
+            height: 100,
+            child: custom_widgets.ConnectToRoom(
+              width: double.infinity,
+              height: 100,
+              room: valueOrDefault(currentUserDocument?.room, ''),
+              role: valueOrDefault(currentUserDocument?.role, ''),
+              displayName: currentUserDisplayName,
+            ),
           ),
-        ),
+          AuthUserStreamWidget(
+            child: FutureBuilder<List<SignalsRecord>>(
+              future: querySignalsRecordOnce(
+                queryBuilder: (signalsRecord) => signalsRecord.where('room',
+                    isEqualTo: valueOrDefault(currentUserDocument?.room, '')),
+                singleRecord: true,
+              ),
+              builder: (context, snapshot) {
+                // Customize what your widget looks like when it's loading.
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: CircularProgressIndicator(
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                      ),
+                    ),
+                  );
+                }
+                List<SignalsRecord> textSignalsRecordList = snapshot.data;
+                // Return an empty Container when the document does not exist.
+                if (snapshot.data.isEmpty) {
+                  return Container();
+                }
+                final textSignalsRecord = textSignalsRecordList.isNotEmpty
+                    ? textSignalsRecordList.first
+                    : null;
+                return Text(
+                  textSignalsRecord.message,
+                  style: FlutterFlowTheme.of(context).title2,
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
