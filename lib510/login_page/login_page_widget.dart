@@ -272,7 +272,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily: 'Roboto',
+                                            fontFamily: 'Playfair Display',
                                             color: Color(0xFF1F1F1F),
                                             fontWeight: FontWeight.normal,
                                           ),

@@ -76,20 +76,20 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.grannysFirstCarer;
+    if (value != null) {
+      result
+        ..add('grannysFirstCarer')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType(Object)])));
+    }
     value = object.room;
     if (value != null) {
       result
         ..add('room')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
-    }
-    value = object.signalsReference;
-    if (value != null) {
-      result
-        ..add('signalsReference')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
     }
     value = object.reference;
     if (value != null) {
@@ -147,15 +147,15 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
           result.role = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'room':
-          result.room = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
-          break;
-        case 'signalsReference':
-          result.signalsReference = serializers.deserialize(value,
+        case 'grannysFirstCarer':
+          result.grannysFirstCarer = serializers.deserialize(value,
                   specifiedType: const FullType(
                       DocumentReference, const [const FullType(Object)]))
               as DocumentReference<Object>;
+          break;
+        case 'room':
+          result.room = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
           break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
@@ -188,9 +188,9 @@ class _$UsersRecord extends UsersRecord {
   @override
   final String role;
   @override
-  final String room;
+  final DocumentReference<Object> grannysFirstCarer;
   @override
-  final DocumentReference<Object> signalsReference;
+  final String room;
   @override
   final DocumentReference<Object> reference;
 
@@ -206,8 +206,8 @@ class _$UsersRecord extends UsersRecord {
       this.favorites,
       this.phoneNumber,
       this.role,
+      this.grannysFirstCarer,
       this.room,
-      this.signalsReference,
       this.reference})
       : super._();
 
@@ -230,8 +230,8 @@ class _$UsersRecord extends UsersRecord {
         favorites == other.favorites &&
         phoneNumber == other.phoneNumber &&
         role == other.role &&
+        grannysFirstCarer == other.grannysFirstCarer &&
         room == other.room &&
-        signalsReference == other.signalsReference &&
         reference == other.reference;
   }
 
@@ -254,8 +254,8 @@ class _$UsersRecord extends UsersRecord {
                             favorites.hashCode),
                         phoneNumber.hashCode),
                     role.hashCode),
-                room.hashCode),
-            signalsReference.hashCode),
+                grannysFirstCarer.hashCode),
+            room.hashCode),
         reference.hashCode));
   }
 
@@ -270,8 +270,8 @@ class _$UsersRecord extends UsersRecord {
           ..add('favorites', favorites)
           ..add('phoneNumber', phoneNumber)
           ..add('role', role)
+          ..add('grannysFirstCarer', grannysFirstCarer)
           ..add('room', room)
-          ..add('signalsReference', signalsReference)
           ..add('reference', reference))
         .toString();
   }
@@ -313,14 +313,14 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   String get role => _$this._role;
   set role(String role) => _$this._role = role;
 
+  DocumentReference<Object> _grannysFirstCarer;
+  DocumentReference<Object> get grannysFirstCarer => _$this._grannysFirstCarer;
+  set grannysFirstCarer(DocumentReference<Object> grannysFirstCarer) =>
+      _$this._grannysFirstCarer = grannysFirstCarer;
+
   String _room;
   String get room => _$this._room;
   set room(String room) => _$this._room = room;
-
-  DocumentReference<Object> _signalsReference;
-  DocumentReference<Object> get signalsReference => _$this._signalsReference;
-  set signalsReference(DocumentReference<Object> signalsReference) =>
-      _$this._signalsReference = signalsReference;
 
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
@@ -342,8 +342,8 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _favorites = $v.favorites?.toBuilder();
       _phoneNumber = $v.phoneNumber;
       _role = $v.role;
+      _grannysFirstCarer = $v.grannysFirstCarer;
       _room = $v.room;
-      _signalsReference = $v.signalsReference;
       _reference = $v.reference;
       _$v = null;
     }
@@ -375,8 +375,8 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
               favorites: _favorites?.build(),
               phoneNumber: phoneNumber,
               role: role,
+              grannysFirstCarer: grannysFirstCarer,
               room: room,
-              signalsReference: signalsReference,
               reference: reference);
     } catch (_) {
       String _$failedField;

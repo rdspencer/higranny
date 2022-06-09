@@ -1,13 +1,4 @@
 // Automatic FlutterFlow imports
-import '../../backend/backend.dart';
-import '../../flutter_flow/flutter_flow_theme.dart';
-import '../../flutter_flow/flutter_flow_util.dart';
-import 'index.dart'; // Imports other custom widgets
-import '../actions/index.dart'; // Imports custom actions
-import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
-import 'package:flutter/material.dart';
-// Begin custom widget code
-// Automatic FlutterFlow imports
 import 'package:flutter/cupertino.dart';
 
 import '../../backend/backend.dart';
@@ -105,8 +96,7 @@ class _ConnectToRoomState extends State<ConnectToRoom> {
               child: StreamBuilder<List<SignalsRecord>>(
                   stream: querySignalsRecord(
                     queryBuilder: (signalsRecord) => signalsRecord.where('room',
-                        isEqualTo:
-                            valueOrDefault(currentUserDocument?.room, '')),
+                        isEqualTo: valueOrDefault(currentUserDocument?.room, '')),
                     singleRecord: true,
                   ),
                   builder: (BuildContext context, snapshot) {
@@ -137,46 +127,44 @@ class _ConnectToRoomState extends State<ConnectToRoom> {
                           {
                             AssetsAudioPlayer.newPlayer().open(
                               Audio("assets/audios/phone1.wav"),
-                              // autoPlay: true,
+                             // autoPlay: true,
                               showNotification: true,
                             );
                             return Center(
-                              //   child: Column(
-                              // children: [
-                              // SizedBox(height: 150),
-                              child: SizedBox(
-                                height: 1000.0,
-                                width: double.maxFinite,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        print('(X1)');
-                                        _joinMeeting(
-                                            widget.room, widget.displayName);
-                                      },
-                                      child: Text(
-                                        "Answer ${buildNumber}",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 100,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      style: ElevatedButton.styleFrom(
-                                        primary: Colors.green,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
+                             //   child: Column(
+                             // children: [
+                               // SizedBox(height: 150),
+                                child: SizedBox(
+                                  height: 1000.0,
+                                  width: double.maxFinite,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          print('(X1)');
+                                          _joinMeeting(widget.room, widget.displayName);
+                                        },
+                                        child: Text(
+                                          "Answer ${buildNumber}",
+                                          style: TextStyle(color: Colors.white,
+                                          fontSize: 100,
+                                          fontWeight: FontWeight.bold),
                                         ),
-                                        elevation: 15.0,
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Colors.green,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(100),
+                                          ),
+                                          elevation: 15.0,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              //  ],
-                              // )
+                            //  ],
+                           // )
                             );
                             break;
                           }

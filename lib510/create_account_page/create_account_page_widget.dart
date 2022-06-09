@@ -6,7 +6,6 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -19,7 +18,6 @@ class CreateAccountPageWidget extends StatefulWidget {
 }
 
 class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
-  SignalsRecord sigRef;
   String radioButtonValue;
   TextEditingController confirmPasswordTextController;
   bool passwordVisibility2;
@@ -412,57 +410,47 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                         color: Color(0xFFE0E0E0),
                                         borderRadius: BorderRadius.circular(25),
                                       ),
-                                      child: Visibility(
-                                        visible: functions.isCarerSelected(
-                                                radioButtonValue) ??
-                                            true,
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  20, 0, 20, 0),
-                                          child: TextFormField(
-                                            controller: textController4,
-                                            obscureText: false,
-                                            decoration: InputDecoration(
-                                              hintText:
-                                                  'Granny\'s tablet\'s name',
-                                              hintStyle: GoogleFonts.getFont(
-                                                'Open Sans',
-                                                color: Color(0x7F455A64),
-                                                fontWeight: FontWeight.normal,
-                                              ),
-                                              enabledBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
-                                              focusedBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
-                                            ),
-                                            style: GoogleFonts.getFont(
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            20, 0, 20, 0),
+                                        child: TextFormField(
+                                          controller: textController4,
+                                          obscureText: false,
+                                          decoration: InputDecoration(
+                                            hintText:
+                                                'Granny\'s tablet\'s name',
+                                            hintStyle: GoogleFonts.getFont(
                                               'Open Sans',
-                                              color: Color(0xFF455A64),
+                                              color: Color(0x7F455A64),
                                               fontWeight: FontWeight.normal,
                                             ),
+                                            enabledBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color(0x00000000),
+                                                width: 1,
+                                              ),
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                topLeft: Radius.circular(4.0),
+                                                topRight: Radius.circular(4.0),
+                                              ),
+                                            ),
+                                            focusedBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color(0x00000000),
+                                                width: 1,
+                                              ),
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                topLeft: Radius.circular(4.0),
+                                                topRight: Radius.circular(4.0),
+                                              ),
+                                            ),
+                                          ),
+                                          style: GoogleFonts.getFont(
+                                            'Open Sans',
+                                            color: Color(0xFF455A64),
+                                            fontWeight: FontWeight.normal,
                                           ),
                                         ),
                                       ),
@@ -489,7 +477,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                         textStyle: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily: 'Roboto',
+                                              fontFamily: 'Playfair Display',
                                               color: Colors.black,
                                             ),
                                         buttonPosition:
@@ -543,43 +531,21 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                             createUsersRecordData(
                                           email: emailTextController.text,
                                           displayName: textController2.text,
-                                          role: 'Carer',
                                           photoUrl: '',
-                                          uid: '',
-                                          createdTime: getCurrentTimestamp,
                                           phoneNumber: '',
-                                          room: functions
-                                              .generateRoomFromDisplayNameAndEmail(
-                                                  textController4.text,
-                                                  textController3.text),
+                                          role: 'Carer',
+                                          room: valueOrDefault<String>(
+                                            functions
+                                                .generateRoomFromDisplayNameAndEmail(
+                                                    textController2.text,
+                                                    textController3.text),
+                                            '000000',
+                                          ),
                                         );
                                         await UsersRecord.collection
                                             .doc(user.uid)
                                             .update(usersCreateData);
 
-                                        final signalsCreateData =
-                                            createSignalsRecordData(
-                                          room: functions
-                                              .generateRoomFromDisplayNameAndEmail(
-                                                  textController2.text,
-                                                  textController3.text),
-                                          message: '0',
-                                        );
-                                        var signalsRecordReference =
-                                            SignalsRecord.collection.doc();
-                                        await signalsRecordReference
-                                            .set(signalsCreateData);
-                                        sigRef =
-                                            SignalsRecord.getDocumentFromData(
-                                                signalsCreateData,
-                                                signalsRecordReference);
-
-                                        final usersUpdateData =
-                                            createUsersRecordData(
-                                          signalsReference: sigRef.reference,
-                                        );
-                                        await currentUserReference
-                                            .update(usersUpdateData);
                                         await Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
@@ -588,10 +554,8 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                           ),
                                           (r) => false,
                                         );
-
-                                        setState(() {});
                                       },
-                                      text: 'Create Account for Granny',
+                                      text: 'Create Account. for Granny',
                                       options: FFButtonOptions(
                                         width: 300,
                                         height: 50,
@@ -645,15 +609,16 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                             createUsersRecordData(
                                           email: emailTextController.text,
                                           displayName: textController2.text,
-                                          role: 'Carer',
                                           photoUrl: '',
-                                          uid: '',
-                                          createdTime: getCurrentTimestamp,
                                           phoneNumber: '',
-                                          room: functions
-                                              .generateRoomFromDisplayNameAndEmail(
-                                                  textController4.text,
-                                                  textController3.text),
+                                          role: 'Carer',
+                                          room: valueOrDefault<String>(
+                                            functions
+                                                .generateRoomFromDisplayNameAndEmail(
+                                                    textController2.text,
+                                                    textController3.text),
+                                            '000000',
+                                          ),
                                         );
                                         await UsersRecord.collection
                                             .doc(user.uid)
@@ -668,7 +633,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                           (r) => false,
                                         );
                                       },
-                                      text: 'Create Account for Carer',
+                                      text: 'Create Account. for Carer',
                                       options: FFButtonOptions(
                                         width: 300,
                                         height: 50,
@@ -702,7 +667,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Roboto',
+                                          fontFamily: 'Playfair Display',
                                           color: Color(0xFF1F1F1F),
                                           fontWeight: FontWeight.normal,
                                         ),

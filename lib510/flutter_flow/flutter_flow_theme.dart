@@ -16,43 +16,43 @@ abstract class FlutterFlowTheme {
   Color secondaryText;
 
   TextStyle get title1 => GoogleFonts.getFont(
-        'Montserrat',
+        'Playfair Display',
         color: Colors.black,
         fontWeight: FontWeight.w600,
         fontSize: 22,
       );
   TextStyle get title2 => GoogleFonts.getFont(
-        'Montserrat',
+        'Poppins',
         color: Color(0xFF303030),
         fontWeight: FontWeight.w500,
         fontSize: 22,
       );
   TextStyle get title3 => GoogleFonts.getFont(
-        'Montserrat',
+        'Poppins',
         color: Color(0xFF303030),
         fontWeight: FontWeight.w500,
         fontSize: 20,
       );
   TextStyle get subtitle1 => GoogleFonts.getFont(
-        'Montserrat',
+        'Playfair Display',
         color: secondaryColor,
         fontWeight: FontWeight.w500,
         fontSize: 16,
       );
   TextStyle get subtitle2 => GoogleFonts.getFont(
-        'Montserrat',
+        'Poppins',
         color: Color(0xFF616161),
         fontWeight: FontWeight.normal,
         fontSize: 16,
       );
   TextStyle get bodyText1 => GoogleFonts.getFont(
-        'Roboto',
+        'Playfair Display',
         color: tertiaryColor,
         fontWeight: FontWeight.normal,
         fontSize: 14,
       );
   TextStyle get bodyText2 => GoogleFonts.getFont(
-        'Roboto',
+        'Playfair Display',
         color: Colors.black,
         fontWeight: FontWeight.normal,
         fontSize: 14,
@@ -64,9 +64,9 @@ class LightModeTheme extends FlutterFlowTheme {
   Color secondaryColor = const Color(0xFFF1F4F8);
   Color tertiaryColor = const Color(0xFF8B97A2);
   Color alternate = const Color(0x00000000);
-  Color primaryBackground = const Color(0xFFA639B1);
+  Color primaryBackground = const Color(0x00000000);
   Color secondaryBackground = const Color(0x00000000);
-  Color primaryText = const Color(0xFF000000);
+  Color primaryText = const Color(0x00000000);
   Color secondaryText = const Color(0x00000000);
 }
 

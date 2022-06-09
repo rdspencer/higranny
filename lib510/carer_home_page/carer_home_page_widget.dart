@@ -63,12 +63,7 @@ class _CarerHomePageWidgetState extends State<CarerHomePageWidget> {
                       children: [
                         Text(
                           'Name: ',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                fontFamily: 'Roboto',
-                                color: FlutterFlowTheme.of(context).primaryText,
-                              ),
+                          style: FlutterFlowTheme.of(context).bodyText1,
                         ),
                         AuthUserStreamWidget(
                           child: Text(
@@ -95,18 +90,17 @@ class _CarerHomePageWidgetState extends State<CarerHomePageWidget> {
                     ),
                     FlutterFlowRadioButton(
                       options: [
-                        'Immediate  video and audio',
+                        'Immeadiate video and audio',
                         'Audio then video on answer',
                         'Ring then video and audio on answer'
                       ].toList(),
-                      initialValue: 'Immediate  video and audio',
                       onChanged: (value) {
                         setState(() => radioButtonValue = value);
                       },
                       optionHeight: 25,
                       textStyle:
                           FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Roboto',
+                                fontFamily: 'Playfair Display',
                                 color: Colors.black,
                               ),
                       buttonPosition: RadioButtonPosition.left,
@@ -130,12 +124,11 @@ class _CarerHomePageWidgetState extends State<CarerHomePageWidget> {
                       onPressed: () async {
                         await Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => CarerVideoPageWidget(
-                              grannyCallAction: radioButtonValue,
-                              signalsReference:
-                                  currentUserDocument?.signalsReference,
-                            ),
+                          PageTransition(
+                            type: PageTransitionType.fade,
+                            duration: Duration(milliseconds: 300),
+                            reverseDuration: Duration(milliseconds: 300),
+                            child: CarerVideoPageWidget(),
                           ),
                         );
                       },
@@ -146,7 +139,7 @@ class _CarerHomePageWidgetState extends State<CarerHomePageWidget> {
                         color: Color(0xFF14A76C),
                         textStyle:
                             FlutterFlowTheme.of(context).subtitle2.override(
-                                  fontFamily: 'Montserrat',
+                                  fontFamily: 'Poppins',
                                   color: Colors.white,
                                 ),
                         borderSide: BorderSide(
@@ -192,7 +185,7 @@ class _CarerHomePageWidgetState extends State<CarerHomePageWidget> {
                 return Text(
                   textSignalsRecord.message,
                   style: FlutterFlowTheme.of(context).title2.override(
-                        fontFamily: 'Montserrat',
+                        fontFamily: 'Poppins',
                         color: FlutterFlowTheme.of(context).primaryColor,
                       ),
                 );

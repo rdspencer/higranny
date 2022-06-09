@@ -117,8 +117,8 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'LoginPage': LoginPageWidget(),
       'HomePage': HomePageWidget(),
-      'GrannyHomePage': GrannyHomePageWidget(),
       'CarerHomePage': CarerHomePageWidget(),
+      'GrannyHomePage': GrannyHomePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -155,11 +155,11 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.accessible_forward_sharp,
+              Icons.accessibility_sharp,
               size: 26,
             ),
             activeIcon: Icon(
-              Icons.accessible,
+              Icons.accessibility,
               size: 26,
             ),
             label: 'Home',
@@ -167,11 +167,11 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.accessibility_sharp,
+              Icons.accessible_forward_sharp,
               size: 26,
             ),
             activeIcon: Icon(
-              Icons.accessibility,
+              Icons.accessible,
               size: 26,
             ),
             label: 'Home',
