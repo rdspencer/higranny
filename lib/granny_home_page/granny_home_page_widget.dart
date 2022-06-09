@@ -26,10 +26,10 @@ class _GrannyHomePageWidgetState extends State<GrannyHomePageWidget> {
         children: [
           Container(
             width: double.infinity,
-            height: 100,
+            height: 500,
             child: custom_widgets.ConnectToRoom(
               width: double.infinity,
-              height: 100,
+              height: 500,
               room: valueOrDefault(currentUserDocument?.room, ''),
               role: valueOrDefault(currentUserDocument?.role, ''),
               displayName: currentUserDisplayName,
