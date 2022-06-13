@@ -5,7 +5,6 @@ import '../flutter_flow/flutter_flow_radio_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -129,18 +128,13 @@ class _CarerHomePageWidgetState extends State<CarerHomePageWidget> {
                     ),
                     FFButtonWidget(
                       onPressed: () async {
-                        final signalsUpdateData = createSignalsRecordData(
-                          message: radioButtonValue,
-                        );
-                        await currentUserDocument?.signalsReference
-                            .update(signalsUpdateData);
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => CarerVideoPageWidget(
-                              room:
-                                  valueOrDefault(currentUserDocument?.room, ''),
-                              displayName: currentUserDisplayName,
+                              grannyCallAction: radioButtonValue,
+                              signalsReference:
+                                  currentUserDocument?.signalsReference,
                             ),
                           ),
                         );

@@ -5,21 +5,14 @@ import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CarerVideoPageWidget extends StatefulWidget {
-  const CarerVideoPageWidget({
-    Key key,
-    this.room,
-    this.displayName,
-  }) : super(key: key);
-
-  final String room;
-  final String displayName;
+class HomePageWidget extends StatefulWidget {
+  const HomePageWidget({Key key}) : super(key: key);
 
   @override
-  _CarerVideoPageWidgetState createState() => _CarerVideoPageWidgetState();
+  _HomePageWidgetState createState() => _HomePageWidgetState();
 }
 
-class _CarerVideoPageWidgetState extends State<CarerVideoPageWidget> {
+class _HomePageWidgetState extends State<HomePageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -31,12 +24,10 @@ class _CarerVideoPageWidgetState extends State<CarerVideoPageWidget> {
         child: Container(
           width: double.infinity,
           height: double.infinity,
-          child: custom_widgets.ConnectToRoom(
+          child: custom_widgets.NavigateToGrannyOrCarer(
             width: double.infinity,
             height: double.infinity,
-            room: valueOrDefault(currentUserDocument?.room, ''),
             role: valueOrDefault(currentUserDocument?.role, ''),
-            displayName: currentUserDisplayName,
           ),
         ),
       ),

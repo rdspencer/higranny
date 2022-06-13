@@ -207,6 +207,16 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       0, 0, 0, 18),
                                   child: FFButtonWidget(
                                     onPressed: () async {
+                                      setState(() => FFAppState().role =
+                                              valueOrDefault<String>(
+                                            valueOrDefault(
+                                                currentUserDocument?.role, ''),
+                                            '\'undefined\'',
+                                          ));
+                                      setState(() =>
+                                          FFAppState().grannysFirstCarer =
+                                              currentUserReference);
+
                                       final user = await signInWithEmail(
                                         context,
                                         emailTextController.text,
