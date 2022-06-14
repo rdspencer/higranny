@@ -136,7 +136,7 @@ class _CarerHomePageWidgetState extends State<CarerHomePageWidget> {
                               currentUserDocument?.firstCarersEmail, ''),
                           radioButtonValue,
                         );
-                        await Navigator.push(
+                      /*  await Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => CarerVideoPageWidget(
@@ -145,7 +145,7 @@ class _CarerHomePageWidgetState extends State<CarerHomePageWidget> {
                               displayName: currentUserDisplayName,
                             ),
                           ),
-                        );
+                        );*/
                       },
                       text: 'Call Granny',
                       options: FFButtonOptions(

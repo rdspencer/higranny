@@ -18,31 +18,24 @@ class _GrannyHomePageWidgetState extends State<GrannyHomePageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    print('(X160)${currentUserDocument.role}&${currentUserDocument.displayName}^${currentUserDocument.grannyDisplayName}');
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-          Expanded(
-            flex: 5,
-            child: Container(
+          Container(
+            width: double.infinity,
+            height: 100,
+            child: custom_widgets.ConnectToRoom(
               width: double.infinity,
-              // height: 100,
-              child: custom_widgets.ConnectToRoom(
-                width: double.infinity,
-                height: 100,
-                room: valueOrDefault(currentUserDocument?.room, ''),
-                role: valueOrDefault(currentUserDocument?.role, ''),
-                displayName: currentUserDisplayName,
-                grannyDisplayName:
-                valueOrDefault(currentUserDocument?.grannyDisplayName, ''),
-              ),
+              height: 100,
+              room: valueOrDefault(currentUserDocument?.room, ''),
+              role: 'Granny',
+              displayName: valueOrDefault(currentUserDocument?.displayName, '')
             ),
           ),
           Expanded(
-            flex: 1,
             child: Container(
               width: double.infinity,
               height: 100,

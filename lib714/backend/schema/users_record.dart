@@ -41,6 +41,10 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
   String get room;
 
   @nullable
+  @BuiltValueField(wireName: 'message_for_granny')
+  String get messageForGranny;
+
+  @nullable
   @BuiltValueField(wireName: 'granny_display_name')
   String get grannyDisplayName;
 
@@ -51,9 +55,6 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
   @nullable
   @BuiltValueField(wireName: 'ref_to_granny')
   DocumentReference get refToGranny;
-
-  @nullable
-  String get message;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -68,9 +69,9 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
     ..phoneNumber = ''
     ..role = ''
     ..room = ''
+    ..messageForGranny = ''
     ..grannyDisplayName = ''
-    ..firstCarersEmail = ''
-    ..message = '';
+    ..firstCarersEmail = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('users');
@@ -102,10 +103,10 @@ Map<String, dynamic> createUsersRecordData({
   String phoneNumber,
   String role,
   String room,
+  String messageForGranny,
   String grannyDisplayName,
   String firstCarersEmail,
   DocumentReference refToGranny,
-  String message,
 }) =>
     serializers.toFirestore(
         UsersRecord.serializer,
@@ -119,7 +120,7 @@ Map<String, dynamic> createUsersRecordData({
           ..phoneNumber = phoneNumber
           ..role = role
           ..room = room
+          ..messageForGranny = messageForGranny
           ..grannyDisplayName = grannyDisplayName
           ..firstCarersEmail = firstCarersEmail
-          ..refToGranny = refToGranny
-          ..message = message));
+          ..refToGranny = refToGranny));

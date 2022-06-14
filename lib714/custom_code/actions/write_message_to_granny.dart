@@ -6,7 +6,6 @@ import 'index.dart'; // Imports other custom actions
 import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 import '../../auth/auth_util.dart';
-
 // Begin custom action code
 Future writeMessageToGranny(
   BuildContext context,
@@ -30,7 +29,7 @@ Future writeMessageToGranny(
         // grannyRef = grannyRefWidgetUsersRecord.reference;
         print('(X45)${grannyRef}');
     final usersUpdateData = createUsersRecordData(
-      message: radioButtonChoice,
+      messageForGranny: radioButtonChoice,
     );
     grannyRef.update({'message': radioButtonChoice});
     print('(X46)${grannyRef}');

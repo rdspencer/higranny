@@ -35,7 +35,7 @@ class _CarerVideoPageWidgetState extends State<CarerVideoPageWidget> {
         displayName: '',
         photoUrl: '',
       );
-    //  await FFAppState().carersGrannysRef.update(usersUpdateData);
+      await FFAppState().carersGrannysRef.update(usersUpdateData);
     });
   }
 

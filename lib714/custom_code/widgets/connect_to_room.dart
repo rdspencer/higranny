@@ -8,16 +8,6 @@ import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom widget code
 // Automatic FlutterFlow imports
-import '../../backend/backend.dart';
-import '../../flutter_flow/flutter_flow_theme.dart';
-import '../../flutter_flow/flutter_flow_util.dart';
-import 'index.dart'; // Imports other custom widgets
-import '../actions/index.dart'; // Imports custom actions
-import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
-import 'package:flutter/material.dart';
-import '../../main.dart';
-// Begin custom widget code
-// Automatic FlutterFlow imports
 import 'package:flutter/cupertino.dart';
 
 import '../../backend/backend.dart';
@@ -72,7 +62,6 @@ class ConnectToRoom extends StatefulWidget {
     this.room,
     this.role,
     this.displayName,
-    this.grannyDisplayName,
   }) : super(key: key);
 
   final double width;
@@ -80,7 +69,7 @@ class ConnectToRoom extends StatefulWidget {
   final String room;
   final String role;
   final String displayName;
-  final String grannyDisplayName;
+
   @override
   _ConnectToRoomState createState() => _ConnectToRoomState();
 }
@@ -112,115 +101,118 @@ class _ConnectToRoomState extends State<ConnectToRoom> {
       return Scaffold(
           // key: scaffoldKey,
           // backgroundColor: FlutterFlowTheme.of(context).primaryColor,
-          body: SafeArea(
-            child: Center(
-                child: StreamBuilder<List<UsersRecord>>(
-                    stream: queryUsersRecord(
-                      queryBuilder: (usersRecord) => usersRecord.where('room',
-                          isEqualTo:
-                              valueOrDefault(currentUserDocument?.room, '')),
-                      singleRecord: false,
-                    ),
-                    builder: (BuildContext context, snapshot) {
-                      print('(X105)${snapshot}%${currentUserDocument.room}');
-                      if (!snapshot.hasData) return new Text('Loading...');
-                      print('(X106)${snapshot.data}');
-                      if ((snapshot.data != null) & (snapshot.data.length > 0)) {
-                        print(
-                            '(X107)${snapshot.data.first}^${widget.room}%${widget.displayName}');
-                        command = snapshot.data.first.message;
-                        print('(X108)${command}<');
-                        String truncCommand = 'XXXX';
-                        if (command.length > 3) {
-                          truncCommand = command.substring(0, 3);
-                        }
-                        print('(X109)${command}%${truncCommand}<');
-                        switch (truncCommand) {
-                          case 'Imm': //Immediate video and audio
-                            {
-                              print('(X130)${command}<');
-                              String truncCommand = 'XXXX';
-                              _joinMeeting(widget.room, widget.displayName);
-                              return Container(child: Text('Connection closed'));
-                              break;
-                            }
-                          case 'Aud': //Audio then video on answer
-                            {
-                              print('(X131)${command}<');
-                              String truncCommand = 'XXXX';
-                              _joinMeeting(widget.room, widget.displayName,
-                                  audioOn: true, videoOn: false);
-                              return Container(child: Text('Connection closed'));
-                              break;
-                            }
-                          case 'Rin': //Ring then video and audio on answer
-                            {
-                              print('(X132)${command}<');
-                              String truncCommand = 'XXXX';
-                              AssetsAudioPlayer.newPlayer().open(
-                                Audio("assets/audios/phone1.wav"),
-                                // autoPlay: true,
-                                showNotification: true,
-                              );
-                              return Center(
-                                //   child: Column(
-                                // children: [
-                                // SizedBox(height: 150),
-                                // child: SizedBox(
-                                //   height: 800.0,
-                                //   width: double.maxFinite,
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      print('(X134)');
-                                      _joinMeeting(
-                                          widget.room, widget.displayName);
-                                    },
-                                    child: Text(
-                                      'Answer ${buildNumber}',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 100,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Colors.green,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                      ),
-                                      elevation: 15.0,
-                                    ),
-                                  ),
-                               // ),
-                                //  ],
-                                // )
-                              );
-                              break;
-                            }
-                          default:
-                            {
-                              print('(X120)${command}%${truncCommand}<');
-                              return Text('Unknown coimmand');
-                              break;
-                            }
-                        }
-                      } else {
-                        print('(X121)');
-                        return Container(child: Center(child: Text('No data')));
+          body: Center(
+              child: StreamBuilder<List<UsersRecord>>(
+                  stream: queryUsersRecord(
+                    queryBuilder: (usersRecord) => usersRecord.where('room',
+                        isEqualTo:
+                            valueOrDefault(currentUserDocument?.room, '')),
+                    singleRecord: false,
+                  ),
+                  builder: (BuildContext context, snapshot) {
+                    print('(X105)${snapshot}%${currentUserDocument.room}');
+                    if (!snapshot.hasData) return new Text('Loading...');
+                    print('(X106)${snapshot.data}');
+                    if ((snapshot.data != null) & (snapshot.data.length > 0)) {
+                      print(
+                          '(X107)${snapshot.data.first}^${widget.room}%${widget.displayName}');
+                      command = snapshot.data.first.message;
+                      print('(X108)${command}<');
+                      String truncCommand = 'XXXX';
+                      if (command.length > 3) {
+                        truncCommand = command.substring(0, 3);
                       }
-                    })),
-          ));
+                      print('(X109)${command}%${truncCommand}<');
+                      switch (truncCommand) {
+                        case 'Imm': //Immediate video and audio
+                          {
+                            print('(X130)${command}<');
+                            String truncCommand = 'XXXX';
+                            _joinMeeting(widget.room, widget.displayName);
+                            return Container();
+                            break;
+                          }
+                        case 'Aud': //Audio then video on answer
+                          {
+                            print('(X131)${command}<');
+                            String truncCommand = 'XXXX';
+                            _joinMeeting(widget.room, widget.displayName,
+                                audioOn: true, videoOn: false);
+                            return Container();
+                            break;
+                          }
+                        case 'Rin': //Ring then video and audio on answer
+                          {
+                            print('(X132)${command}<');
+                            String truncCommand = 'XXXX';
+                            AssetsAudioPlayer.newPlayer().open(
+                              Audio("assets/audios/phone1.wav"),
+                              // autoPlay: true,
+                              showNotification: true,
+                            );
+                            return Center(
+                              //   child: Column(
+                              // children: [
+                              // SizedBox(height: 150),
+                              child: SizedBox(
+                                height: 1000.0,
+                                width: double.maxFinite,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        print('(X134)');
+                                        _joinMeeting(
+                                            widget.room, widget.displayName);
+                                      },
+                                      child: Text(
+                                        "Answer ${buildNumber}",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 100,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.green,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                        ),
+                                        elevation: 15.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              //  ],
+                              // )
+                            );
+                            break;
+                          }
+                        default:
+                          {
+                            print('(X120)${command}%${truncCommand}<');
+                            return Text('Unknown coimmand');
+                            break;
+                          }
+                      }
+                    } else {
+                      print('(X121)');
+                      return Container(child: Center(child: Text('No data')));
+                    }
+
+
+                  })));
     } else {
-      //if role == 'Carer'
       return Scaffold(
         // key: scaffoldKey,
         // backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
         body: Center(
           child: Column(
             children: [
-              SizedBox(height: 150),
               SizedBox(
-                height: 150.0,
+                height: 50.0,
                 width: double.maxFinite,
                 child: ElevatedButton(
                   onPressed: () {
@@ -234,29 +226,6 @@ class _ConnectToRoomState extends State<ConnectToRoom> {
                   style: ButtonStyle(
                       backgroundColor: MaterialStateColor.resolveWith(
                           (states) => Colors.blue)),
-                ),
-              ),
-              SizedBox(height: 150),
-              SizedBox(
-                height: 150.0,
-                width: double.maxFinite,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            NavBarPage(initialPage: 'CarerHomePage'),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    "Return to menu",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateColor.resolveWith(
-                          (states) => Colors.green)),
                 ),
               ),
             ],
@@ -325,8 +294,7 @@ class _ConnectToRoomState extends State<ConnectToRoom> {
       // FeatureFlagEnum.RECORDING_ENABLED: false,
       /// Flag indicating if tile view feature should be enabled.
       /// Default: enabled.
-      FeatureFlagEnum.TILE_VIEW_ENABLED: true,
-
+      // FeatureFlagEnum.TILE_VIEW_ENABLED: true,
       /// Flag indicating if the toolbox should be always be visible
       /// Default: disabled (false).
       FeatureFlagEnum.TOOLBOX_ALWAYS_VISIBLE: true,

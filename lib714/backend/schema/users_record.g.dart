@@ -83,6 +83,13 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.messageForGranny;
+    if (value != null) {
+      result
+        ..add('message_for_granny')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.grannyDisplayName;
     if (value != null) {
       result
@@ -104,13 +111,6 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
                 DocumentReference, const [const FullType(Object)])));
-    }
-    value = object.message;
-    if (value != null) {
-      result
-        ..add('message')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
     }
     value = object.reference;
     if (value != null) {
@@ -172,6 +172,10 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
           result.room = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'message_for_granny':
+          result.messageForGranny = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'granny_display_name':
           result.grannyDisplayName = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -185,10 +189,6 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
                   specifiedType: const FullType(
                       DocumentReference, const [const FullType(Object)]))
               as DocumentReference<Object>;
-          break;
-        case 'message':
-          result.message = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
           break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
@@ -223,13 +223,13 @@ class _$UsersRecord extends UsersRecord {
   @override
   final String room;
   @override
+  final String messageForGranny;
+  @override
   final String grannyDisplayName;
   @override
   final String firstCarersEmail;
   @override
   final DocumentReference<Object> refToGranny;
-  @override
-  final String message;
   @override
   final DocumentReference<Object> reference;
 
@@ -246,10 +246,10 @@ class _$UsersRecord extends UsersRecord {
       this.phoneNumber,
       this.role,
       this.room,
+      this.messageForGranny,
       this.grannyDisplayName,
       this.firstCarersEmail,
       this.refToGranny,
-      this.message,
       this.reference})
       : super._();
 
@@ -273,10 +273,10 @@ class _$UsersRecord extends UsersRecord {
         phoneNumber == other.phoneNumber &&
         role == other.role &&
         room == other.room &&
+        messageForGranny == other.messageForGranny &&
         grannyDisplayName == other.grannyDisplayName &&
         firstCarersEmail == other.firstCarersEmail &&
         refToGranny == other.refToGranny &&
-        message == other.message &&
         reference == other.reference;
   }
 
@@ -303,10 +303,10 @@ class _$UsersRecord extends UsersRecord {
                                     phoneNumber.hashCode),
                                 role.hashCode),
                             room.hashCode),
-                        grannyDisplayName.hashCode),
-                    firstCarersEmail.hashCode),
-                refToGranny.hashCode),
-            message.hashCode),
+                        messageForGranny.hashCode),
+                    grannyDisplayName.hashCode),
+                firstCarersEmail.hashCode),
+            refToGranny.hashCode),
         reference.hashCode));
   }
 
@@ -322,10 +322,10 @@ class _$UsersRecord extends UsersRecord {
           ..add('phoneNumber', phoneNumber)
           ..add('role', role)
           ..add('room', room)
+          ..add('messageForGranny', messageForGranny)
           ..add('grannyDisplayName', grannyDisplayName)
           ..add('firstCarersEmail', firstCarersEmail)
           ..add('refToGranny', refToGranny)
-          ..add('message', message)
           ..add('reference', reference))
         .toString();
   }
@@ -371,6 +371,11 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   String get room => _$this._room;
   set room(String room) => _$this._room = room;
 
+  String _messageForGranny;
+  String get messageForGranny => _$this._messageForGranny;
+  set messageForGranny(String messageForGranny) =>
+      _$this._messageForGranny = messageForGranny;
+
   String _grannyDisplayName;
   String get grannyDisplayName => _$this._grannyDisplayName;
   set grannyDisplayName(String grannyDisplayName) =>
@@ -385,10 +390,6 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   DocumentReference<Object> get refToGranny => _$this._refToGranny;
   set refToGranny(DocumentReference<Object> refToGranny) =>
       _$this._refToGranny = refToGranny;
-
-  String _message;
-  String get message => _$this._message;
-  set message(String message) => _$this._message = message;
 
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
@@ -411,10 +412,10 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _phoneNumber = $v.phoneNumber;
       _role = $v.role;
       _room = $v.room;
+      _messageForGranny = $v.messageForGranny;
       _grannyDisplayName = $v.grannyDisplayName;
       _firstCarersEmail = $v.firstCarersEmail;
       _refToGranny = $v.refToGranny;
-      _message = $v.message;
       _reference = $v.reference;
       _$v = null;
     }
@@ -447,10 +448,10 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
               phoneNumber: phoneNumber,
               role: role,
               room: room,
+              messageForGranny: messageForGranny,
               grannyDisplayName: grannyDisplayName,
               firstCarersEmail: firstCarersEmail,
               refToGranny: refToGranny,
-              message: message,
               reference: reference);
     } catch (_) {
       String _$failedField;
