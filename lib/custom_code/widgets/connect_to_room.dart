@@ -52,7 +52,7 @@ import '../../auth/auth_util.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 
 String command = '';
-const int buildNumber = 612;
+const int buildNumber = 717;
 
 class ConnectToRoom extends StatefulWidget {
   const ConnectToRoom({
@@ -96,45 +96,55 @@ class _ConnectToRoomState extends State<ConnectToRoom> {
   @override
   Widget build(BuildContext context) {
     String serverUrl = 'https://meet.jitsi.si';
-    print('(X2)${widget.role}');
+    print('(X2)${widget.role}*${currentUserDocument.room}');
     if (widget.role == 'Granny') {
       return Scaffold(
           // key: scaffoldKey,
           // backgroundColor: FlutterFlowTheme.of(context).primaryColor,
           body: Center(
-              child: StreamBuilder<List<SignalsRecord>>(
-                  stream: querySignalsRecord(
-                    queryBuilder: (signalsRecord) => signalsRecord.where('room',
+              child: StreamBuilder<List<UsersRecord>>(
+                  stream: queryUsersRecord(
+                    queryBuilder: (usersRecord) => usersRecord.where('room',
                         isEqualTo:
                             valueOrDefault(currentUserDocument?.room, '')),
-                    singleRecord: true,
+                    singleRecord: false,
                   ),
                   builder: (BuildContext context, snapshot) {
-                    print('(X105)${snapshot}');
+                    print('(X105)${snapshot}%${currentUserDocument.room}');
                     if (!snapshot.hasData) return new Text('Loading...');
                     print('(X106)${snapshot.data}');
                     if ((snapshot.data != null) & (snapshot.data.length > 0)) {
                       print(
                           '(X107)${snapshot.data.first}^${widget.room}%${widget.displayName}');
                       command = snapshot.data.first.message;
-                      String truncCommand = command.substring(0, 3);
+                      print('(X108)${command}<');
+                      String truncCommand = 'XXXX';
+                      if (command.length > 3) {
+                        truncCommand = command.substring(0, 3);
+                      }
                       print('(X109)${command}%${truncCommand}<');
                       switch (truncCommand) {
-                        case 'Imme': //Immediate video and audio
+                        case 'Imm': //Immediate video and audio
                           {
+                            print('(X130)${command}<');
+                            String truncCommand = 'XXXX';
                             _joinMeeting(widget.room, widget.displayName);
                             return Container();
                             break;
                           }
-                        case 'Audi': //Audio then video on answer
+                        case 'Aud': //Audio then video on answer
                           {
+                            print('(X131)${command}<');
+                            String truncCommand = 'XXXX';
                             _joinMeeting(widget.room, widget.displayName,
                                 audioOn: true, videoOn: false);
                             return Container();
                             break;
                           }
-                        case 'Ring': //Ring then video and audio on answer
+                        case 'Rin': //Ring then video and audio on answer
                           {
+                            print('(X132)${command}<');
+                            String truncCommand = 'XXXX';
                             AssetsAudioPlayer.newPlayer().open(
                               Audio("assets/audios/phone1.wav"),
                               // autoPlay: true,
@@ -152,7 +162,7 @@ class _ConnectToRoomState extends State<ConnectToRoom> {
                                   children: [
                                     ElevatedButton(
                                       onPressed: () {
-                                        print('(X1)');
+                                        print('(X134)');
                                         _joinMeeting(
                                             widget.room, widget.displayName);
                                       },
@@ -182,12 +192,17 @@ class _ConnectToRoomState extends State<ConnectToRoom> {
                           }
                         default:
                           {
-                            return Text('XXX');
+                            print('(X120)${command}%${truncCommand}<');
+                            return Text('Unknown coimmand');
                             break;
                           }
                       }
+                    } else {
+                      print('(X121)');
+                      return Container(child: Center(child: Text('No data')));
                     }
-                    ;
+
+
                   })));
     } else {
       return Scaffold(

@@ -1,10 +1,12 @@
 import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../carer_video_page/carer_video_page_widget.dart';
 import '../flutter_flow/flutter_flow_radio_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
+import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -134,18 +136,17 @@ class _CarerHomePageWidgetState extends State<CarerHomePageWidget> {
                               currentUserDocument?.grannyDisplayName, ''),
                           valueOrDefault(
                               currentUserDocument?.firstCarersEmail, ''),
-                          radioButtonValue,
                         );
-                      /*  await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CarerVideoPageWidget(
-                              room:
-                                  valueOrDefault(currentUserDocument?.room, ''),
-                              displayName: currentUserDisplayName,
-                            ),
-                          ),
-                        );*/
+                        // await Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => CarerVideoPageWidget(
+                        //       room:
+                        //           valueOrDefault(currentUserDocument?.room, ''),
+                        //       displayName: currentUserDisplayName,
+                        //     ),
+                        //   ),
+                        // );
                       },
                       text: 'Call Granny',
                       options: FFButtonOptions(
@@ -169,6 +170,86 @@ class _CarerHomePageWidgetState extends State<CarerHomePageWidget> {
               ),
             ],
           ),
+/*          AuthUserStreamWidget(
+            child: StreamBuilder<List<SignalsRecord>>(
+              stream: querySignalsRecord(
+                queryBuilder: (signalsRecord) => signalsRecord.where('room',
+                    isEqualTo: valueOrDefault(currentUserDocument?.room, '')),
+                singleRecord: true,
+              ),
+              builder: (context, snapshot) {
+                // Customize what your widget looks like when it's loading.
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: CircularProgressIndicator(
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                      ),
+                    ),
+                  );
+                }
+                List<SignalsRecord> textSignalsRecordList = snapshot.data;
+                // Return an empty Container when the document does not exist.
+                if (snapshot.data.isEmpty) {
+                  return Container();
+                }
+                final textSignalsRecord = textSignalsRecordList.isNotEmpty
+                    ? textSignalsRecordList.first
+                    : null;
+                return Text(
+                  textSignalsRecord.message,
+                  style: FlutterFlowTheme.of(context).title2.override(
+                        fontFamily: 'Montserrat',
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                      ),
+                );
+              },
+            ),
+          ),
+          AuthUserStreamWidget(
+            child: StreamBuilder<List<UsersRecord>>(
+              stream: queryUsersRecord(
+                queryBuilder: (usersRecord) => usersRecord.where('display_name',
+                    isEqualTo: valueOrDefault(
+                        currentUserDocument?.grannyDisplayName, '')),
+                singleRecord: true,
+              ),
+              builder: (context, snapshot) {
+                // Customize what your widget looks like when it's loading.
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: CircularProgressIndicator(
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                      ),
+                    ),
+                  );
+                }
+                List<UsersRecord> grannyRefWidgetUsersRecordList =
+                    snapshot.data;
+                // Return an empty Container when the document does not exist.
+                if (snapshot.data.isEmpty) {
+                  return Container();
+                }
+                final grannyRefWidgetUsersRecord =
+                    grannyRefWidgetUsersRecordList.isNotEmpty
+                        ? grannyRefWidgetUsersRecordList.first
+                        : null;
+                return Container(
+                  width: 100,
+                  height: 100,
+                  child: custom_widgets.GrannyRefWidget(
+                    width: 100,
+                    height: 100,
+                  ),
+                );
+              },
+            ),
+          ),*/
         ],
       ),
     );
