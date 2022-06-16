@@ -1,13 +1,4 @@
-// Automatic FlutterFlow imports
-import '../../backend/backend.dart';
-import '../../flutter_flow/flutter_flow_theme.dart';
-import '../../flutter_flow/flutter_flow_util.dart';
-import 'index.dart'; // Imports other custom widgets
-import '../actions/index.dart'; // Imports custom actions
-import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
-import 'package:flutter/material.dart';
-// Begin custom widget code
-// Automatic FlutterFlow imports
+
 import '../../backend/backend.dart';
 import '../../flutter_flow/flutter_flow_theme.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
@@ -16,53 +7,31 @@ import '../actions/index.dart'; // Imports custom actions
 import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 import '../../main.dart';
-// Begin custom widget code
-// Automatic FlutterFlow imports
 import 'package:flutter/cupertino.dart';
-
-import '../../backend/backend.dart';
-import '../../flutter_flow/flutter_flow_theme.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
-import 'index.dart'; // Imports other custom widgets
-import '../actions/index.dart'; // Imports custom actions
-import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
-import 'package:flutter/material.dart';
-// Begin custom widget code
-// Automatic FlutterFlow imports
-import '../../backend/backend.dart';
-import '../../flutter_flow/flutter_flow_theme.dart';
-import '../../flutter_flow/flutter_flow_util.dart';
-import 'index.dart'; // Imports other custom widgets
-import '../actions/index.dart'; // Imports custom actions
-import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
-import 'package:flutter/material.dart';
-// Begin custom widget code
-// Automatic FlutterFlow imports
-import '../../backend/backend.dart';
-import '../../flutter_flow/flutter_flow_theme.dart';
-import '../../flutter_flow/flutter_flow_util.dart';
-import 'index.dart'; // Imports other custom widgets
-import '../actions/index.dart'; // Imports custom actions
-import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
-import 'package:flutter/material.dart';
-// Begin custom widget code
-// Automatic FlutterFlow imports
-/*import '../../backend/backend.dart';
-import '../../flutter_flow/flutter_flow_theme.dart';
-import '../../flutter_flow/flutter_flow_util.dart';
-import 'index.dart'; // Imports other custom widgets
-import '../actions/index.dart'; // Imports custom actions
-import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
-import 'package:flutter/material.dart';*/
-// Begin custom widget code
 import 'dart:io';
 import 'package:jitsi_meet/jitsi_meet.dart';
 import 'package:flutter/foundation.dart';
 import '../../auth/auth_util.dart';
+//import 'package:just_audio/just_audio.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 
+
 String command = '';
-const int buildNumber = 717;
+const int buildNumber = 718;
+bool _ringing = false;
+AssetsAudioPlayer _player;
+
+class PlaylistItemDetails {
+  PlaylistItemDetails(this.index, this.title, this.url);
+  final int index;
+  final String title;
+  final String url;
+}
+List<PlaylistItemDetails> playlistItemDetails = [];
+// ConcatenatingAudioSource _playlist;
+// AudioPlayer _audioPlayer;
+final ring1 =  'asset:///phone1.mp3';// Uri.file('assets/audios/phone1.wav');
 
 class ConnectToRoom extends StatefulWidget {
   const ConnectToRoom({
@@ -86,17 +55,54 @@ class ConnectToRoom extends StatefulWidget {
 }
 
 class _ConnectToRoomState extends State<ConnectToRoom> {
+
+  void ringGranny() async{
+   /*final AssetsAudioPlayer*/ _player =  AssetsAudioPlayer.withId('Ringer');;
+//    final ring1 =  'https://download.samplelib.com/mp3/sample-3s.mp3';
+//     for (int i=0; i < 10; i++) {
+      if (_ringing) {
+        // print('(X180)${i}');
+        _player.open(
+       //   Audio("assets/audios/phone1.wav"),
+          Playlist(
+              audios: [
+               Audio("assets/audios/phone1.wav"),
+                Audio("assets/audios/phone1.wav"),
+                Audio("assets/audios/phone1.wav"),
+                Audio("assets/audios/phone1.wav"),
+                Audio("assets/audios/phone1.wav"),
+                Audio("assets/audios/phone1.wav"),
+                Audio("assets/audios/phone1.wav"),
+                Audio("assets/audios/phone1.wav"),
+              //
+              ]
+          ),
+          //  loopMode: LoopMode.playlist
+          // autoPlay: true,
+
+        );
+      }
+   // }
+
+  }
+
+
   @override
   void initState() {
     super.initState();
+    // _audioPlayer = AudioPlayer();
     print('(X3A)${widget.room}*${widget.displayName}');
     JitsiMeet.addListener(JitsiMeetingListener(
         onConferenceWillJoin: _onConferenceWillJoin,
         onConferenceJoined: _onConferenceJoined,
         onConferenceTerminated: _onConferenceTerminated,
         onError: _onError));
+    _ringing = false;
+    // _player = AssetsAudioPlayer.withId('Ringer');
     print('(X3B)');
   }
+
+  // assetsAudioPlayer.playlistAudioFinished.listen((event){if(event) {//carry out another action you want }  });
 
   @override
   void dispose() {
@@ -104,8 +110,10 @@ class _ConnectToRoomState extends State<ConnectToRoom> {
     JitsiMeet.removeAllListeners();
   }
 
+
   @override
   Widget build(BuildContext context) {
+
     String serverUrl = 'https://meet.jitsi.si';
     print('(X2)${widget.role}*${currentUserDocument.room}');
     if (widget.role == 'Granny') {
@@ -113,103 +121,90 @@ class _ConnectToRoomState extends State<ConnectToRoom> {
           // key: scaffoldKey,
           // backgroundColor: FlutterFlowTheme.of(context).primaryColor,
           body: SafeArea(
-            child: Center(
-                child: StreamBuilder<List<UsersRecord>>(
-                    stream: queryUsersRecord(
-                      queryBuilder: (usersRecord) => usersRecord.where('room',
-                          isEqualTo:
-                              valueOrDefault(currentUserDocument?.room, '')),
-                      singleRecord: false,
-                    ),
-                    builder: (BuildContext context, snapshot) {
-                      print('(X105)${snapshot}%${currentUserDocument.room}');
-                      if (!snapshot.hasData) return new Text('Loading...');
-                      print('(X106)${snapshot.data}');
-                      if ((snapshot.data != null) & (snapshot.data.length > 0)) {
-                        print(
-                            '(X107)${snapshot.data.first}^${widget.room}%${widget.displayName}');
-                        command = snapshot.data.first.message;
-                        print('(X108)${command}<');
-                        String truncCommand = 'XXXX';
-                        if (command.length > 3) {
-                          truncCommand = command.substring(0, 3);
+        child: Center(
+            child: StreamBuilder<List<UsersRecord>>(
+                stream: queryUsersRecord(
+                  queryBuilder: (usersRecord) => usersRecord.where('room',
+                      isEqualTo: valueOrDefault(currentUserDocument?.room, '')),
+                  singleRecord: false,
+                ),
+                builder: (BuildContext context, snapshot) {
+                  print('(X105)${snapshot}%${currentUserDocument.room}');
+                  if (!snapshot.hasData) return new Text('Loading...');
+                  print('(X106)${snapshot.data}');
+                  if ((snapshot.data != null) & (snapshot.data.length > 0)) {
+                    print(
+                        '(X107)${snapshot.data.first}^${widget.room}%${widget.displayName}');
+                    command = snapshot.data.first.message;
+                    print('(X108)${command}<');
+                    String truncCommand = 'XXXX';
+                    if (command.length > 3) {
+                      truncCommand = command.substring(0, 3);
+                    }
+                    print('(X109)${command}%${truncCommand}<');
+                    switch (truncCommand) {
+                      case 'Imm': //Immediate video and audio
+                        {
+                          print('(X130)${command}<');
+                          String truncCommand = 'XXXX';
+                          _joinMeeting(widget.room, widget.displayName);
+                          return Container(child: Text('Connection closed'));
+                          break;
                         }
-                        print('(X109)${command}%${truncCommand}<');
-                        switch (truncCommand) {
-                          case 'Imm': //Immediate video and audio
-                            {
-                              print('(X130)${command}<');
-                              String truncCommand = 'XXXX';
-                              _joinMeeting(widget.room, widget.displayName);
-                              return Container(child: Text('Connection closed'));
-                              break;
-                            }
-                          case 'Aud': //Audio then video on answer
-                            {
-                              print('(X131)${command}<');
-                              String truncCommand = 'XXXX';
-                              _joinMeeting(widget.room, widget.displayName,
-                                  audioOn: true, videoOn: false);
-                              return Container(child: Text('Connection closed'));
-                              break;
-                            }
-                          case 'Rin': //Ring then video and audio on answer
-                            {
-                              print('(X132)${command}<');
-                              String truncCommand = 'XXXX';
-                              AssetsAudioPlayer.newPlayer().open(
-                                Audio("assets/audios/phone1.wav"),
-                                // autoPlay: true,
-                                showNotification: true,
-                              );
-                              return Center(
-                                //   child: Column(
-                                // children: [
-                                // SizedBox(height: 150),
-                                // child: SizedBox(
-                                //   height: 800.0,
-                                //   width: double.maxFinite,
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      print('(X134)');
-                                      _joinMeeting(
-                                          widget.room, widget.displayName);
-                                    },
-                                    child: Text(
-                                      'Answer ${buildNumber}',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 100,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Colors.green,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                      ),
-                                      elevation: 15.0,
-                                    ),
-                                  ),
-                               // ),
-                                //  ],
-                                // )
-                              );
-                              break;
-                            }
-                          default:
-                            {
-                              print('(X120)${command}%${truncCommand}<');
-                              return Text('Unknown coimmand');
-                              break;
-                            }
+                      case 'Aud': //Audio then video on answer
+                        {
+                          print('(X131)${command}<');
+                          String truncCommand = 'XXXX';
+                          _joinMeeting(widget.room, widget.displayName,
+                              audioOn: true, videoOn: false);
+                          return Container(child: Text('Connection closed'));
+                          break;
                         }
-                      } else {
-                        print('(X121)');
-                        return Container(child: Center(child: Text('No data')));
-                      }
-                    })),
-          ));
+                      case 'Rin': //Ring then video and audio on answer
+                        {
+                          print('(X132)${command}<');
+                          _ringing = true;
+                        ringGranny();
+
+                          return Center(
+
+                            child: ElevatedButton(
+
+                              child: const Text(
+                                'Answer',
+                                style: TextStyle(fontSize: 100),
+                              ),
+                              onPressed: () {
+                                _ringing = false;
+                               _player.pause();
+                                print('(X134)');
+                                _joinMeeting(
+                                    widget.room, widget.displayName);
+                                return Container(child: Text('Connection closed'));
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  elevation: 35,
+                                fixedSize: const Size(400, 400),
+                                shape: const CircleBorder(),
+                                primary: Colors.green,
+                              ),
+                            ),
+                          );
+                          break;
+                        }
+                      default:
+                        {
+                          print('(X120)${command}%${truncCommand}<');
+                          return Text('Unknown coimmand');
+                          break;
+                        }
+                    }
+                  } else {
+                    print('(X121)');
+                    return Container(child: Center(child: Text('No data')));
+                  }
+                })),
+      ));
     } else {
       //if role == 'Carer'
       return Scaffold(
