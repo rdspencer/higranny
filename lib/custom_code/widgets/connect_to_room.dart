@@ -18,7 +18,7 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 
 
 String command = '';
-const int buildNumber = 718;
+const int buildNumber = 722;
 bool _ringing = false;
 AssetsAudioPlayer _player;
 
